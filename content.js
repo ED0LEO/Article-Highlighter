@@ -16,24 +16,45 @@ function applyHighlighting() {
                 paragraph.style.padding = '';
             });
         } else if (document.body) {
+            // Get the background color of the page
+            const pageBackgroundColor = getComputedStyle(document.body).backgroundColor;
+
             // Apply highlighting and styles
+            const textColor = getComputedStyle(document.body).color;
             const paragraphs = document.querySelectorAll('p');
             paragraphs.forEach((paragraph) => {
                 if (paragraph.textContent.trim() !== '') {
-                    const computedStyle = getComputedStyle(paragraph);
-                    const textColor = computedStyle.color;
-                    const backgroundColor = getAdjustedBackgroundColor(textColor);
-
-                    paragraph.style.backgroundColor = backgroundColor;
+                    // Change background color for non-link text
+                    const color = getAdjustedBackgroundColor(textColor);
+                    paragraph.style.backgroundColor = color;
                     if (roundedCorners) {
                         paragraph.style.borderRadius = '10px';
                     } else {
                         paragraph.style.borderRadius = '';
                     }
                     paragraph.style.padding = '4px';
+
+                    const links = paragraph.querySelectorAll('a');
+                    if (links.length > 0) {
+                        // Apply the page background color to links
+                        links.forEach((link) => {
+                            //Apply only if detected backgound is not the same as link
+                            const linkTextColor = getComputedStyle(link).color;
+                            if (linkTextColor !== pageBackgroundColor) {
+                                link.style.backgroundColor = pageBackgroundColor;
+                                if (roundedCorners) {
+                                    link.style.borderRadius = '10px';
+                                } else {
+                                    link.style.borderRadius = '';
+                                }
+                                link.style.padding = '4px';
+                            }
+                        });
+                    }
                 }
             });
         }
+
     });
 }
 
