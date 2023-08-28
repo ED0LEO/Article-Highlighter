@@ -12,6 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get(
     ['roundedCorners', 'turnOffAll', 'turnOffWebsites', 'excludeLinks', 'transparency', 'randomColors'],
     (result) => {
+      if (Object.keys(result).length === 0) {
+        // Set the default values
+        const defaultSettings = {
+          turnOffAll: false,
+          turnOffWebsites: [],
+          roundedCorners: true,
+          excludeLinks: true,
+          randomColors: false,
+          transparency: 50
+        };
+
+        chrome.storage.sync.set(defaultSettings);
+      }
+
       const {
         roundedCorners,
         turnOffAll,
@@ -37,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
           turnOffThisCheckbox.checked = false;
         }
       });
+
+      // updateHighlighting();
 
       // Checkbox event listeners
       roundedCornersCheckbox.addEventListener('change', () => {

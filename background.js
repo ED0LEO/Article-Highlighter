@@ -1,5 +1,18 @@
 // background.js
 
+chrome.runtime.onInstalled.addListener(() => {
+  const defaultSettings = {
+    turnOffAll: false,
+    turnOffWebsites: [],
+    roundedCorners: true,
+    excludeLinks: true,
+    randomColors: false,
+    transparency: 50
+  };
+
+  chrome.storage.sync.set(defaultSettings);
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'updateTurnOffWebsites') {
     console.log("if (message.action === 'updateTurnOffWebsites') ");
