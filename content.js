@@ -84,7 +84,7 @@ function getAdjustedBackgroundColor(textColor, adjustedTransparency, randomColor
         const average = sum / 3;
         const medium = average >= 64 && average <= 192;
 
-        const transparency = medium ? adjustedTransparency * 0.3 : adjustedTransparency * 0.5;
+        const transparency = medium ? adjustedTransparency * 0.3 : adjustedTransparency;
 
         if (randomColors)
             return getRandomColorWithTransparency(transparency);
