@@ -1,24 +1,153 @@
-<!-- popup.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
   <title>Article Highlighter Options</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    @media (prefers-color-scheme: light) {
+      body {
+        background-color: #f0f0f0;
+        --text-color: #333;
+        --background-color: #fff;
+        --border-color: #ccc;
+        --border-hover-color: #666;
+        --accent-color: #3498db;
+        --accent-hover-color: #2980b9;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #333;
+        --text-color: #f0f0f0;
+        --background-color: #444;
+        --border-color: #666;
+        --border-hover-color: #999;
+        --accent-color: #3498db;
+        --accent-hover-color: #2980b9;
+      }
+    }
+
+    h1 {
+      color: var(--text-color);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .options-container {
+      background-color: var(--background-color);
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      color: var(--text-color);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      cursor: pointer;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    input[type="checkbox"]:checked {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+
+    input[type="checkbox"]:hover {
+      border-color: var(--border-hover-color);
+    }
+
+    .transparency-bar {
+      margin-top: 12px;
+      position: relative;
+    }
+
+    .transparency-bar input[type="range"] {
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      height: 4px;
+      background-color: var(--border-color);
+      border-radius: 2px;
+      outline: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .transparency-bar input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .reload-button {
+      background-color: var(--accent-color);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 3px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin-top: 16px;
+      width: 100%;
+    }
+
+    .reload-button:hover {
+      background-color: var(--accent-hover-color);
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Article Highlighter Options</h1>
-  <label>
-    <input type="checkbox" id="roundedCorners"> Rounded Corners
-  </label>
-  <br>
-  <label>
-    <input type="checkbox" id="turnOffAll"> Turn Off Highlighting for All Websites
-  </label>
-  <br>
-  <label>
-    <input type="checkbox" id="turnOffThis"> Turn Off Highlighting for this Website
-  </label>
+  <div class="options-container">
+    <label>
+      <input type="checkbox" id="turnOffAll"> Turn Off
+    </label>
+    <label>
+      <input type="checkbox" id="turnOffThis"> Turn Off for This Website
+    </label>
+    <label>
+      <input type="checkbox" id="roundedCorners" checked> Rounded Corners
+    </label>
+    <label>
+      <input type="checkbox" id="excludeLinks" checked> Exclude Links
+    </label>
+    <label>
+      <input type="checkbox" id="randomColors"> Random colors
+    </label>
+    <div class="transparency-bar">
+      <input type="range" min="0" max="100" step="7" value="50" id="transparencyRange">
+      <label for="transparencyRange">Intensity</label>
+    </div>
+    <br>
+    <button class="reload-button" id="reloadButton">Reapply</button>
+  </div>
   <script src="popup.js"></script>
 </body>
 
