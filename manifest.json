@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Article Highlighter",
-  "version": "1.0",
-  "description": "Highlight paragraphs with different colors on articles.",
+  "version": "0.0.0.1",
+  "description": "Highlight paragraphs with different colors.",
   "permissions": [
     "activeTab",
     "storage"
@@ -16,7 +16,8 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "http://*/*",
+        "https://*/*"
       ],
       "js": [
         "content.js"
